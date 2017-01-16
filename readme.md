@@ -1,1 +1,1 @@
-## Biolerplate React App
+## React Timer Application
