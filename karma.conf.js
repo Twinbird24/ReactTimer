@@ -18,7 +18,7 @@ module.exports = function (config) {
       }
     },
     // we don't care about this info, we aren't using webpack server
-    webpack: webpackConfig,
+    webpack: webpackConfig, // use webpack info in webpackconfig.js in order to create tests that use require and let us load in our modules
     webpackServer: {
       noInfo: true
     }
