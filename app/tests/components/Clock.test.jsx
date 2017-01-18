@@ -16,7 +16,7 @@ describe('Clock', () => {
     it('should render clock to output', () => {
       var clock = TestUtils.renderIntoDocument(<Clock totalSeconds={62}/>);
       // this will store the root of our component in terms of the DOM
-      // ReactDOM.findDOMNode(clock) convert our component into the actual HTML thats rendered to the browser, then we pass that to jQuery
+      // ReactDOM.findDOMNode(clock) converts our component into the actual HTML thats rendered to the browser, then we pass that to jQuery
       // and set it equal to $el
       var $el = $(ReactDOM.findDOMNode(clock));
       var actualText = $el.find('.clock-text').text(); // pull the text value from the span tag inside the clock component
