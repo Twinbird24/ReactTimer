@@ -16,7 +16,7 @@ var Countdown = React.createClass({
       // if current state is different from previous state, let's do stuff
       switch (this.state.countdownStatus) {
         // if status is started, start the timer
-        // leaving no break between stopped and causes causes both to run, i.e. stopping resets the count and clears the timer,
+        // leaving no break between stopped and paused causes both to run, i.e. stopping resets the count and clears the timer,
         // pause only stops the timer, and leaves count where it is
         case 'started':
           this.startTimer();
