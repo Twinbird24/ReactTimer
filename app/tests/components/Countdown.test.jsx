@@ -39,5 +39,33 @@ describe('Countdown', () => {
         done();
       }, 3001);
     });
+
+    it('should pause countdown on paused status', (done) => {
+      var countdown = TestUtils.renderIntoDocument(<Countdown/>);
+      countdown.handleSetCountdown(3); // set count to 3 and start the interval
+      // below is handler that gets called when a button gets pressed, we can use it to trigger paused status
+      countdown.handleStatusChange('paused');
+
+      // make sure that when timer is paused, the count doesn't change after time passes
+      setTimeout(() => {
+        expect(countdown.state.count).toBe(3);
+        expect(countdown.state.countdownStatus).toBe('paused');
+        done();
+      }, 1001);
+    });
+
+    it('should reset count on stopped', (done) => {
+      var countdown = TestUtils.renderIntoDocument(<Countdown/>);
+      countdown.handleSetCountdown(3); // set count to 3 and start the interval
+      // below is handler that gets called when a button gets pressed, we can use it to trigger paused status
+      countdown.handleStatusChange('stopped');
+
+      // make sure that timer is stopped and the count is reset
+      setTimeout(() => {
+        expect(countdown.state.count).toBe(0);
+        expect(countdown.state.countdownStatus).toBe('stopped');
+        done();
+      }, 1001);
+    });
   });
 });

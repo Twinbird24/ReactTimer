@@ -6,7 +6,7 @@ var CountdownForm = React.createClass({
     var strSeconds = this.refs.seconds.value;
 
     // make sure input is only numbers, if not match will return null
-    if (strSeconds.match(/^[0-9]*$/)) {
+    if (strSeconds.match(/^[1-9][0-9]*$/)) {
       this.refs.seconds.value = ''; //clear the input
       this.props.onSetCountDown(parseInt(strSeconds, 10)); //the 10 represent the base, we want base 10
     }
