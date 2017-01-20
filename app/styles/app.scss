@@ -1,3 +1,8 @@
+// Foundation
+@import "base/foundation-settings";
+@import "foundation";
+@include foundation-everything;
+
 // partials start with an underscore but we don't need to specify it inside of the import
 @import "base/variables";
 @import "components/navigation";

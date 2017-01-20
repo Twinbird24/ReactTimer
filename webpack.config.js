@@ -1,5 +1,6 @@
 // the webpack variable is used in the plugins array. We use webpack.ProvidePlugin to configure jQuery.
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: [
@@ -45,6 +46,11 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
       }
+    ]
+  },
+  sassLoader: {
+    includePaths: [
+      path.resolve(__dirname, './node_modules/foundation-sites/scss')
     ]
   },
   devtool: 'eval-source-map'

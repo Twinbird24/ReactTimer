@@ -5,7 +5,9 @@ module.exports = function (config) {
     browsers: ['Chrome'],
     singleRun: true,
     frameworks: ['mocha'],
-    files: ['app/tests/**/*.test.jsx'], // our test files here
+    files: ['app/tests/**/*.test.jsx', // our test files here
+    'node_modules/jquery/dist/jquery.min.js', //sciprt! makes sure files are packaged for webpack
+    'node_modules/foundation-sites/dist/foundation.min.js',],
     // things we wanna do with our test files
     preprocessors: {
       'app/tests/**/*.test.jsx': ['webpack', 'sourcemap'] // run webpack so we can load in our components using require

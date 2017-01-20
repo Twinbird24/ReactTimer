@@ -7,7 +7,7 @@ var Timer = require('Timer');
 
 // load foundation, require doesn't know how to load css files, so we use css-loader css!, we also need to inject this into
 // our html so our styles actually show up, using style!
-require('style!css!foundation-sites/dist/foundation.min.css');
+//require('style!css!foundation-sites/dist/foundation.min.css'); <-- Not required anymore, modified wepback.config to point to foundation
 // fire up foundation, by calling the foundation method
 $('document').foundation();
 
