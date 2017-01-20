@@ -1,6 +1,7 @@
 var React = require('react');
 var Clock = require('Clock');
 var CountdownForm = require('CountdownForm');
+var Controls = require('Controls');
 
 var Countdown = React.createClass({
   getInitialState: function () {
@@ -15,8 +16,16 @@ var Countdown = React.createClass({
       // if current state is different from previous state, let's do stuff
       switch (this.state.countdownStatus) {
         // if status is started, start the timer
+        // leaving no break between stopped and causes causes both to run, i.e. stopping resets the count and clears the timer,
+        // pause only stops the timer, and leaves count where it is
         case 'started':
           this.startTimer();
+          break;
+        case 'stopped':
+          this.setState({count: 0}) // count reset to 0
+        case 'paused':
+          clearInterval(this.timer) //clear the timer we have in startTimer below, count will be left alone
+          this.timer = undefined;
           break;
       }
     }
@@ -38,12 +47,27 @@ var Countdown = React.createClass({
       countdownStatus: 'started'
     });
   },
+  handleStatusChange: function (newStatus) {
+    this.setState({
+      countdownStatus: newStatus
+    });
+  },
   render: function() {
-    var {count} = this.state;
+    var {count, countdownStatus} = this.state;
+    var renderControlArea = () => {
+      if (countdownStatus !== 'stopped') {
+        // must be started or paused, so render controls
+        return <Controls countdownStatus={countdownStatus} onStatusChange={this.handleStatusChange}/>;
+        // ^ by passing a function down as a prop, we can wait for actions to get fired on the children and then do something
+        // with those, in thise case we change the countdownStatus
+      } else {
+        return <CountdownForm onSetCountDown={this.handleSetCountdown}/>;
+      }
+    }
     return (
       <div>
         <Clock totalSeconds={count}/>
-        <CountdownForm onSetCountDown={this.handleSetCountdown}/>
+        {renderControlArea()}
       </div>
     );
   }
