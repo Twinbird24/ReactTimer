@@ -10,7 +10,7 @@ var Countdown = React.createClass({
       countdownStatus: 'stopped'
     }
   },
-  // gets called after either props or state get updated
+  // gets called after either props or state get updated - component will update will get fired before this
   componentDidUpdate: function (prevProps, prevState) {
     if (this.state.countdownStatus !== prevState.countdownStatus) {
       // if current state is different from previous state, let's do stuff
@@ -30,6 +30,11 @@ var Countdown = React.createClass({
       }
     }
   },
+  // this gets fired by react right before our component gets removed from the DOM
+  componentWillUnmount: function () {
+    clearInterval(this.timer); // stop timer
+    this.timer = undefined; // clear up the variable
+  },
   startTimer: function () {
     this.timer = setInterval(() => {
       // this code will run every second (1000)
@@ -39,6 +44,11 @@ var Countdown = React.createClass({
         // if new count is greater than or equal to 0 then we update, otherwise we are at 0
         count: newCount >= 0 ? newCount : 0
       });
+
+      // check if we reached 0, and if so, stop running the interval every second
+      if (newCount === 0) {
+        this.setState({countdownStatus: 'stopped'});
+      }
     }, 1000);
   },
   handleSetCountdown: function (seconds) {
